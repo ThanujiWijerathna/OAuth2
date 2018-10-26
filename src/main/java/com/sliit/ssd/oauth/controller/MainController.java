@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.sliit.ssd.oauth.model.FileModel;
 import com.sliit.ssd.oauth.service.GoogleDriveService;
 
-/**
- * @author Saranki Root mapping for the index page
- */
-
 @Controller
 public class MainController {
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sliit.ssd.oauth.util;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -9,10 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Saranki
- *
- */
 @Component
 @PropertySource("classpath:application.properties")
 @ConfigurationProperties

@@ -32,10 +32,6 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.sliit.ssd.oauth.util.AppConfig;
 
-/**
- * @author Saranki
- *
- */
 @Service
 public class GoogleDriveService {
 
@@ -78,16 +74,6 @@ public class GoogleDriveService {
 		return flow.loadCredential(USER_IDENTIFIER_KEY);
 	}
 
-	/**
-	 * Check if the user is authenticated. Initially the credentials of the user
-	 * will be loaded using the identifier key into the credential object. By
-	 * communicating with the google OAuth server, it will check if access token
-	 * and refresh token are created for that particular user. If true then
-	 * refreshToken method will return true.
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
 	public boolean isUserAuthenticated() throws IOException {
 
 		Credential credential = getCredential();
@@ -99,33 +85,12 @@ public class GoogleDriveService {
 		return tokenValid;
 	}
 
-	/**
-	 * Social login is initiated When user clicks on social login button the
-	 * application should redirect the user to gmail account sign-in page.
-	 * 
-	 * newAuthorizationUrl creates the base URL for google OAuth server.
-	 * 
-	 * setAccessType("offline") - The application can access the resources to
-	 * which the user has given access even without the presence of the user.
-	 * 
-	 * @param response
-	 * @throws IOException
-	 * 
-	 **/
 	public void googleSignIn(HttpServletResponse response) throws IOException {
 		GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl();
 		String redirectURL = url.setRedirectUri(appConfig.getCALLBACK_URI()).setAccessType("offline").build();
 		response.sendRedirect(redirectURL);
 	}
 
-	/**
-	 * The code received from google will be stored in the credentials store
-	 * 
-	 * Get the code variable from the request
-	 * 
-	 * @param request
-	 * @throws IOException
-	 */
 	public boolean isStoreAuthorizationCode(HttpServletRequest request) throws IOException {
 		String code = request.getParameter("code");
 
@@ -136,20 +101,11 @@ public class GoogleDriveService {
 		return false;
 	}
 
-	/**
-	 * @param code
-	 * @throws IOException
-	 */
 	private void saveToken(String code) throws IOException {
 		GoogleTokenResponse response = flow.newTokenRequest(code).setRedirectUri(appConfig.getCALLBACK_URI()).execute();
 		flow.createAndStoreCredential(response, USER_IDENTIFIER_KEY);
 	}
 
-	/**
-	 * @throws IOException
-	 * @throws IllegalStateException
-	 * 
-	 */
 	public void uploadFileToDrive(MultipartFile multipartFile) throws IllegalStateException, IOException {
 
 		String originalFileName = multipartFile.getOriginalFilename();

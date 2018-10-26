@@ -1,14 +1,7 @@
-/**
- * 
- */
 package com.sliit.ssd.oauth.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @author Saranki
- *
- */
 public class FileModel {
 	
 	private static final long serialVersionUID = 1L;
